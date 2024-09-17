@@ -43,7 +43,7 @@ const getJobDetailsById=async(req,res)=>{
         const jobDetail=await Job.findById(id);
         return res.status(200).json(jobDetail)
     } catch (error) {
-        return res.status(401).json({message:'Internal Server Error',error:error})
+        return res.status(500).json({message:'Internal Server Error',error:error})
     }
 }
 
@@ -59,7 +59,7 @@ const updateJobDetails=async(req,res)=>{
         const updatedJob=await Job.findByIdAndUpdate(id,{title,description,location,salary},{new:true})
         return res.status(200).json({message:'Updated Job successfully',updatedJob})
     } catch (error) {
-        return res.status(401).json({message:'Internal Server Error'})
+        return res.status(500).json({message:'Internal Server Error'})
     }
 }
 
@@ -72,7 +72,7 @@ const deleteJob=async(req,res)=>{
         const job=await Job.findByIdAndDelete(id);
         return res.status(200).json({message:'Job Deleted successfully'})
     } catch (error) {
-        return res.status(401).json({message:'Internal Server Error'})
+        return res.status(500).json({message:'Internal Server Error'})
     }
 }
 
