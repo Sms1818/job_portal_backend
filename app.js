@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import express from "express";
 import connectDatabase from "./config/database.js";
+import authRoute from './routes/authRoute.js';
 
 const PORT=8000;
 
@@ -12,6 +13,8 @@ const app=express();
 connectDatabase();
 
 app.use(bodyParser.json());
+
+app.use('/jobPortal/auth',authRoute);
 
 app.get('/',(req,res)=>res.send('API is running'));
 
