@@ -27,7 +27,11 @@ const getApplications=async(req,res)=>{
     }
     
     try {
-        const applications=await Application.find({job:jobId}).populate('candidate','name email');
+        const applications=await Application.find({job:jobId}).populate('candidate','name email').populate({path: 'job',  // Populate the job information
+        populate: {
+          path: 'postedBy',  
+          select: 'name' 
+        }});
         res.status(200).json(applications)
     } catch (error) {
         return res.status(500).json({message:"Internal Server Error",error:error})

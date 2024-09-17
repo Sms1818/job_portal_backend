@@ -1,4 +1,5 @@
 import Job from '../models/Job.js'
+import User from '../models/User.js'
 
 const postJob=async(req,res)=>{
     const {title,description,location,salary}=req.body
@@ -47,6 +48,19 @@ const getJobDetailsById=async(req,res)=>{
     }
 }
 
+const getJobDetailsforSpecificCompany=async(req,res)=>{
+    const{userId}=req.params
+    if(await User.findById(userId)==null){
+        return res.status(404).json({message:"Company not found"})
+    }
+    try {
+        const jobDetail=await Job.find({postedBy:userId});
+        return res.status(200).json(jobDetail)
+    } catch (error) {
+        return res.status(500).json({message:'Internal Server Error',error:error})
+    }
+}
+
 
 const updateJobDetails=async(req,res)=>{
     const {id}=req.params;
@@ -76,7 +90,7 @@ const deleteJob=async(req,res)=>{
     }
 }
 
-export { deleteJob, getJobDetails, getJobDetailsById, postJob, updateJobDetails }
+export { deleteJob, getJobDetails, getJobDetailsById, getJobDetailsforSpecificCompany, postJob, updateJobDetails }
 
 
 
