@@ -200,6 +200,13 @@ Authorization: Bearer your_company_token
 Unit and integration tests are provided for all major functionalities. To run the tests:
 
 ```bash
+npm test
+```
+
+Running Tests in Serial: 
+If you encounter issues with tests failing due to parallel execution, you can run tests serially by using the --runInBand option
+
+```bash
 npm test -- --runInBand
 ```
 
