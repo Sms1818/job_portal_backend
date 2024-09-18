@@ -37,8 +37,7 @@ Ensure you have the following installed:
 ### Installation
 1.⁠ ⁠Clone the repository:
    ```bash
-   git clone https://github.com/your-username/job-portal.git
-   cd job-portal
+   git clone https://github.com/Sms1818/job_portal_backend.git
    ```
 2.⁠ ⁠Install the dependencies:
    ```bash
@@ -63,10 +62,10 @@ The server will be running on http://localhost:{PORT}.
 
 #### 1. Register as a Candidate
 
-**POST** `/auth/register`
+**POST** `/jobPortal/auth/register`
 
 ```http
-POST /auth/register HTTP/1.1
+POST /jobPortal/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -80,10 +79,10 @@ Content-Type: application/json
 #### 2. Login (Generate Token)
 After registering, you can log in to generate a token, which must be included in the header of future requests.
 
-**POST** `/auth/login`
+**POST** `/jobPortal/auth/login`
 
 ```http
-POST /auth/login HTTP/1.1
+POST /jobPortal//auth/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -107,13 +106,13 @@ Content-Type: application/json
 
 #### 1. Post a Job (Company Only)
 
-**POST** `/job`
+**POST** `/jobPortal/job`
 
 - Only accessible by companies. Ensure you have a valid token generated from a company login.
 - Add the token in the Authorization header.
 
 ```http
-POST /job HTTP/1.1
+POST /jobPortal/job HTTP/1.1
 Authorization: Bearer your_company_token
 Content-Type: application/json
 
@@ -127,34 +126,34 @@ Content-Type: application/json
 
 #### 2. Get All Jobs
 
-**GET** `/job`
+**GET** `/jobPortal/job`
 
 ```http
-GET /job HTTP/1.1
+GET /jobPortal/job HTTP/1.1
 ```
 
 #### 3. Get Job by ID
 
-**GET** `/job/:jobId`
+**GET** `/jobPortal/job/:jobId`
 
 ```http
-GET /job/60d...dce1 HTTP/1.1
+GET /jobPortal/job/60d...dce1 HTTP/1.1
 ```
 
 #### 4. Update Job by ID
 
-**PATCH** `/job/:jobId`
+**PATCH** `/jobPortal/job/:jobId`
 
 ```http
-PATCH /job/60d...dce1 HTTP/1.1
+PATCH /jobPortal/job/60d...dce1 HTTP/1.1
 ```
 
 #### 5. DELETE Job by ID
 
-**DELETE** `/job/:jobId`
+**DELETE** `/jobPortal/job/:jobId`
 
 ```http
-DELETE /job/60d...dce1 HTTP/1.1
+DELETE /jobPortal/job/60d...dce1 HTTP/1.1
 ```
 
 
@@ -162,13 +161,13 @@ DELETE /job/60d...dce1 HTTP/1.1
 
 #### 1. Apply for a Job (Candidate Only)
 
-**POST** `/application/:jobId`
+**POST** `/jobPortal/application/:jobId`
 
 - Candidates must be logged in and include the token in the request header.
 - Pass the job ID in the URL and the resume link in the body.
 
 ```http
-POST /application/60d...dce1 HTTP/1.1
+POST /jobPortal/application/60d...dce1 HTTP/1.1
 Authorization: Bearer your_candidate_token
 Content-Type: application/json
 
@@ -179,12 +178,12 @@ Content-Type: application/json
 
 #### 2. Get Applications for a Job (Company Only)
 
-**GET** `/application/:jobId`
+**GET** `/jobPortal/application/:jobId`
 
 - Companies can view all applications for their posted jobs by providing the job ID.
 
 ```http
-GET /application/60d...dce1 HTTP/1.1
+GET /jobPortal/application/60d...dce1 HTTP/1.1
 Authorization: Bearer your_company_token
 ```
 
