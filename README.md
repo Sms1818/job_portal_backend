@@ -200,7 +200,7 @@ Authorization: Bearer your_company_token
 Unit and integration tests are provided for all major functionalities. To run the tests:
 
 ```bash
-npm test
+npm test -- --runInBand
 ```
 
 ### Additional Notes
