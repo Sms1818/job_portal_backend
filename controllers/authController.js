@@ -11,6 +11,8 @@ const registerUser=async(req,res)=>{
             return res.status(400).json({msg:'User already exists'})
         }
 
+
+
         const hashPwd= await bcrypt.hash(password,10);
 
         const newUser=new User({
@@ -24,6 +26,7 @@ const registerUser=async(req,res)=>{
         res.status(201).json({msg:'User created successfully',newUser})
     }
     catch(error){
+        console.log("Error while registeration!",error.message);
         return res.status(500).json({msg:'Internal Server Error'});
     }
 }
@@ -42,6 +45,10 @@ const loginUser=async(req,res)=>{
             return res.status(400).json({msg:'Invalid password'})
         }
 
+        if (!process.env.SECRET_KEY) {
+            return res.status(500).json({ message: 'Missing secret key.'});
+        }
+
         const token=jwt.sign(
             {
                 userId:user._id, 
@@ -51,9 +58,10 @@ const loginUser=async(req,res)=>{
             {expiresIn:'3h'}
         )
 
-        return res.status(200).json({token});
+        return res.status(200).json({message:'Login Successful',token});
     }
     catch(error){
+        console.log("Error while login the user!",error.message);
         return res.status(500).json({msg:'Internal Server Error'});
     }
 }

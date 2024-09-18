@@ -1,12 +1,12 @@
-import bodyParser from "body-parser";
 import dotenv from 'dotenv';
 import express from "express";
+import helmet from 'helmet';
 import connectDatabase from "./config/database.js";
 import applicationRoute from "./routes/applicationRoute.js";
 import authRoute from './routes/authRoute.js';
 import jobRoute from "./routes/jobRoute.js";
 
-const PORT=8000;
+const PORT=process.env.PORT || 8000;
 
 dotenv.config();
 
@@ -14,7 +14,8 @@ const app=express();
 
 connectDatabase();
 
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(helmet());
 
 app.use('/jobPortal/auth',authRoute);
 app.use('/jobPortal/job',jobRoute);
